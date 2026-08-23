@@ -1,7 +1,33 @@
 # ExChange Desktop
 
-Оболочка Electron для сайта **https://exchangeprojects.site**  
-Сборка Windows / Linux / macOS через **GitHub Actions**.
+Окно Electron для https://exchangeprojects.site  
+Сборка Windows / Linux / macOS — GitHub Actions.
+
+## Название приложения
+
+В `package.json`:
+- `"productName": "ExChange"` — имя в меню Пуск, на ярлыке, в .exe
+- `"name": "exchange-desktop"` — внутреннее имя npm (латиница, без пробелов)
+
+После смены `productName` — новая сборка в Actions.
+
+## Иконки
+
+Положи файлы в папку **`build/`**:
+
+| Файл | Назначение |
+|------|------------|
+| `build/icon.ico` | Windows (лучше 256×256 в .ico) |
+| `build/icon.icns` | macOS |
+| `build/icon.png` | Linux / запасной (512×512) |
+
+Собрать `.ico` / `.icns`: https://www.electron.build/icons или https://icoconvert.com
+
+В `package.json` уже указано `"buildResources": "build"`.
+
+## Telegram-вход
+
+Логин через Telegram открывается **внутри приложения** (oauth.telegram.org), а не во внешнем браузере.
 
 ## Локально
 
@@ -12,33 +38,4 @@ npm start
 
 ## GitHub Actions
 
-1. Создай **новый** репозиторий (например `exchange-desktop`).
-2. Залей все файлы из этой папки в корень репо.
-3. **Actions** → **Build desktop apps** → **Run workflow**.
-4. После сборки: **Artifacts** → скачай:
-   - `exchange-win` → `.exe`
-   - `exchange-linux` → `.AppImage` / `.deb`
-   - `exchange-mac` → `.dmg`
-
-### Релиз по тегу
-
-```bash
-git tag v1.0.0
-git push origin v1.0.0
-```
-
-Сборка + GitHub Release с файлами установщиков.
-
-## Иконка (по желанию)
-
-Положи в `build/`:
-
-- `icon.ico` — Windows  
-- `icon.icns` — macOS  
-- `icons/` — png 256/512 для Linux  
-
-Без иконки сборка тоже пройдёт (иконка Electron по умолчанию).
-
-## Смена URL сайта
-
-В `main.js` измени `SITE_URL`.
+Actions → **Build desktop apps** → **Run workflow** → скачать Artifacts.
