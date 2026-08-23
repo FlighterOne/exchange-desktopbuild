@@ -28,8 +28,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'npm'
+          node-version: '22'
 
       - name: Install dependencies
         run: npm install
@@ -46,7 +45,6 @@ jobs:
         if: matrix.platform == 'mac'
         run: npm run build:mac
         env:
-          # Без платной подписи Apple — сборка unsigned (для теста)
           CSC_IDENTITY_AUTO_DISCOVERY: 'false'
 
       - name: Upload artifacts
@@ -55,13 +53,14 @@ jobs:
           name: exchange-${{ matrix.platform }}
           path: |
             dist/*.exe
+            dist/*Setup*.exe
             dist/*.msi
             dist/*.AppImage
             dist/*.deb
             dist/*.dmg
             dist/*.zip
-            dist/*.yml
-            dist/*.yaml
+            dist/latest*.yml
+            dist/latest*.yaml
           if-no-files-found: warn
           retention-days: 30
 
