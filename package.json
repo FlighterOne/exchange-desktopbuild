@@ -14,7 +14,7 @@
   },
   "build": {
     "appId": "site.exchangeprojects.app",
-    "productName": "ExChange",
+    "productName": "ExChange Projects",
     "copyright": "Copyright © ExChange",
     "directories": {
       "output": "dist",
